@@ -76,6 +76,8 @@ Use code <strong>FOUNDING20</strong> for 20% off your first year. <a href="https
 | `search_posts` | Search posts by keyword, optionally limited to the past day, week, or month. |
 | `close_session` | Close the shared browser session without deleting your saved login. |
 
+See the [tool reference](docs/tools.md) for parameters, return values, side effects, and filters, and [Limits and safe usage](#limits-and-safe-usage) before you automate anything.
+
 <br/>
 <br/>
 
@@ -891,6 +893,48 @@ uv run -m linkedin_mcp_server --transport streamable-http --host 127.0.0.1 --por
 </details>
 
 </details>
+
+<br/>
+<br/>
+
+## Limits and safe usage
+
+The server does not cap how often you call it. It runs one tool call at a time
+and backs off when LinkedIn shows a rate-limit page, but the volume is up to
+you and your agent.
+
+**Budgets.** The maintainers keep their own live testing within these
+budgets, which make a sensible ceiling for one account:
+
+- At most 10 calls a minute and 100 a day for any one tool.
+- Profile and company pages no faster than one a second.
+- At most 30 connection invitations a day, at least 10 seconds apart. Count
+  every attempt, even one that returned `send_failed` or `outcome_unknown`.
+- After a login challenge, a CAPTCHA or a rate-limit page, stop for 24 hours.
+
+**One call can cost several page loads.** `get_person_profile` loads one page
+per requested section, `send_message` takes three actions, and
+`connect_with_person` up to seven.
+
+**What it does not do.**
+
+- No Sales Navigator, Recruiter or other Premium-only views.
+- No posting, commenting, reacting or applying to jobs.
+- `send_message` starts a new compose window; it cannot reply inside an
+  existing thread or InMail ([#483](https://github.com/stickerdaniel/linkedin-mcp-server/issues/483)).
+- It sees only what your account sees. Out-of-network and private profiles
+  show what LinkedIn shows you in a browser.
+- Results are raw page text for your agent to read, not structured fields.
+  When LinkedIn changes its pages, a section can come back empty until the
+  server is updated.
+
+**Side effects on your account.** `send_message` and `connect_with_person`
+act as you, and clients that honour MCP's destructive hint ask before running
+them. `get_conversation` by username and `search_conversations` click inbox
+rows, which can mark unread messages as read.
+
+**Other people's data.** Profiles, contact details and messages you read are
+personal data. Store and use them as your local privacy law requires.
 
 <br/>
 <br/>

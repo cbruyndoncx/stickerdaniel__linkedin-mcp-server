@@ -14,15 +14,19 @@ A Model Context Protocol (MCP) server that connects AI assistants to LinkedIn. A
 - **Company Profiles**: Extract comprehensive company data, including the LinkedIn company URN id (used by LinkedIn's people-search `currentCompany` URL facet)
 - **Company Employees**: List employees at a company with optional keyword filtering
 - **Company Search**: Search for companies by keyword
-- **Job Details**: Retrieve job posting information
-- **Job Search**: Search for jobs with keywords and location filters
-- **Saved Jobs**: List job postings saved by the authenticated user
-- **People Search**: Search for people by keywords and location
+- **Job Details**: Retrieve job posting information, including whether you applied or the posting closed
+- **Job Apply URL**: Check whether a job uses Easy Apply or an employer's own application, and return that link
+- **Job Search**: Search for jobs by keywords and location, with filters for date posted, job type, experience level, work type, Easy Apply and sort order
+- **Saved Jobs**: List the authenticated user's job tracker: saved, in progress, applied or archived
+- **People Search**: Search for people by keywords, location, connection degree and current company
 - **Person Posts**: Get recent activity/posts from a person's profile
 - **Company Posts**: Get recent posts from a company's LinkedIn feed
 - **Home Feed**: Get recent posts from the authenticated user's LinkedIn home feed
 - **Post Search**: Search posts/content globally by keyword (the "Posts" tab) with an optional recency filter
+- **Session Control**: Close the shared browser without deleting the saved login
 - **Compact References**: Return typed per-section links alongside readable text without shipping full-page markdown
+
+See the [tool reference](https://github.com/stickerdaniel/linkedin-mcp-server/blob/main/docs/tools.md) for parameters and side effects.
 
 ## Quick Start
 
