@@ -1,7 +1,7 @@
 # Tool Reference
 
 What each MCP tool takes, returns, and changes on your account. Written against
-v4.26.2. The tool docstrings in `linkedin_mcp_server/tools/` are the source of
+`main` at `b71682f`, after v4.26.2; `get_job_apply_url` is not in a release yet. The tool docstrings in `linkedin_mcp_server/tools/` are the source of
 truth, and your MCP client shows them; when this page and a docstring disagree,
 the docstring wins.
 
@@ -156,7 +156,7 @@ may be incomplete; calling again may return more.
 
 ### `get_job_apply_url`
 
-Takes `job_id`. Returns `apply.type` (`easy_apply`, `external`, `applied`,
+Not released yet (after v4.26.2). Takes `job_id`. Returns `apply.type` (`easy_apply`, `external`, `applied`,
 `closed` or `unknown`) and, for external postings, the employer's application
 link as LinkedIn gives it. Nothing is clicked and the link is not opened, so
 short links stay unexpanded.
